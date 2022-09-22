@@ -16,6 +16,9 @@
 # =================================================================
 argmax:
     # Prologue
+    addi sp, sp, -4
+    sw ra, 0(sp)    # Always save the value of ra at the start of a function 
+                    # and restore it at the end of a function.
     ble a1, x0, error
     addi t1, x0, 0      # t1: count the location of the array.
     addi t4, x0, -2048 # t4, temporary max value
@@ -33,7 +36,8 @@ loop_continue:
     bge x0, x0, loop_start
 loop_end:
     # Epilogue
-
+    lw ra, 0(sp)
+    addi sp, sp, 4
     jr ra
 
 error:

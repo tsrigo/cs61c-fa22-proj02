@@ -20,6 +20,9 @@
 dot:
 
     # Prologue
+    addi sp, sp, -4
+    sw ra, 0(sp)    # Always save the value of ra at the start of a function 
+                    # and restore it at the end of a function.
     ble a2, x0, error1
     ble a3, x0, error2
     ble a4, x0, error2
@@ -48,10 +51,9 @@ loop_start:
 
 loop_end:
     add a0, x0, t6
-
+    lw ra, 0(sp)
+    addi sp, sp, 4
     # Epilogue
-
-
     jr ra
 
 error1:

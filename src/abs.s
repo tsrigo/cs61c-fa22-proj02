@@ -10,7 +10,9 @@
 # =================================================================
 abs:
     # Prologue
-
+    addi sp, sp, -4
+    sw ra, 0(sp)    # Always save the value of ra at the start of a function 
+                    # and restore it at the end of a function.
     # PASTE HERE
 
     # Load number from memory
@@ -27,5 +29,6 @@ abs:
     done:
     ret   
     # Epilogue
-
+    lw ra, 0(sp)
+    addi sp, sp, 4
     jr ra

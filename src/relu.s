@@ -14,9 +14,9 @@
 # ==============================================================================
 relu:
     # Prologue
-    # addi sp, sp, -8
-    # sw a0, 4(sp)
-    # sw a1, 0(sp)
+    addi sp, sp, -4
+    sw ra, 0(sp)    # Always save the value of ra at the start of a function 
+                    # and restore it at the end of a function.
     ebreak
     ble a1, x0, error
     addi t1, x0, 0      # t1: count the location of the array.
@@ -34,9 +34,8 @@ loop_continue:
 loop_end:
 
     # Epilogue
-    # lw a0, 4(sp)
-    # lw a1, 0(sp)
-    # addi sp, sp, 8
+    lw ra, 0(sp)
+    addi sp, sp, 4
     jr ra
 
 error:
