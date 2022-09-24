@@ -36,15 +36,15 @@ abs_loss
 
 class TestAbsLoss(unittest.TestCase):
     # Focus:
-    # 1. There shold be both cases of array1[i] > array2[i] and array1[i] < array2[i].
-    # 2. You should check the invail length input.
+    # 1. There should be both cases of array1[i] > array2[i] and array1[i] < array2[i].
+    # 2. You should check the invalid length input.
     # 3. You should imitate the use of any function rightly from unittests.py.
     # 4. When you are writing other test and want to copy some other codes, 
     #    you should remember to modify the path of function AssemblyTest() and 
     #    the argument of t.call().
-    # 5. Lookink into the assembly code of initialize zero and you will find 
+    # 5. Looking into the assembly code of initialize zero and you will find 
     #    you need both check the lower and upper boundary.
-    
+
     def test_simple(self):
         # load the test for abs_loss.s
         t = AssemblyTest(self, "../coverage-src/abs_loss.s")
