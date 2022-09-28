@@ -84,13 +84,13 @@ read_matrix:
     # prologue of fread
     addi sp, sp, -16
     sw ra, 0(sp)
-    sw a0, 4(sp)    # The file descriptor of the file we want to read from, previously returned by fopen.
-    sw a1, 8(sp)    # A pointer to the buffer where the read bytes will be stored. 
-    sw a2, 12(sp)   # The number of bytes to read from the file.
+    sw a0, 4(sp)    
+    sw a1, 8(sp)    
+    sw a2, 12(sp)   
     # call fread
-    add a0, s0, x0
-    add a1, s1, x0
-    li a2, 8
+    add a0, s0, x0  # The file descriptor of the file we want to read from, previously returned by fopen.
+    add a1, s1, x0  # A pointer to the buffer where the read bytes will be stored. 
+    li a2, 8        # The number of bytes to read from the file.
     jal fread
         # check error
     li a2, 8
