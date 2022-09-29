@@ -48,7 +48,7 @@ classify:
     ebreak##* 1. Read three matrices
     #* 1.0 allocate space for the pointer arguments row and col for 3 matrixs
     # call malloc
-    li a0, 24
+    li a0, 24           #! Wrong: li a0, 6
     jal malloc
     # check error
     beq a0, x0, mallocError
@@ -56,8 +56,7 @@ classify:
     mv s0, a0
     
     #* 1.1 read matrix m0
-    # addi a0, s1, 4
-    lw a0, 4(s1)
+    lw a0, 4(s1)        #! Wrong: addi a0, s1, 4
     addi a1, s0, 0      # save the row of m0 in s0[0]
     addi a2, s0, 4      # save the col of m0 in s0[1]
     jal read_matrix
@@ -77,7 +76,7 @@ classify:
 
     ebreak##* 2. Compute h = matmul(m0, input)
     #* 2.1 malloc space for h
-    lw t0, 0(s0)   # rows
+    lw t0, 0(s0)    # rows
     lw t1, 20(s0)   # cols
     mul a0, t0, t1
     slli a0, a0, 2  # since the unit of malloc is byte, so you should multiply a0 by 4
