@@ -92,6 +92,21 @@ class TestRelu(unittest.TestCase):
 
 
 class TestArgmax(unittest.TestCase):
+    def test_argmax_Mytest(self):
+        t = AssemblyTest(self, "argmax.s")
+        # create an array in the data section
+        array0 = t.array([-34 ,884, -1076, 74, 394])
+        # load address of the array into register a0
+        t.input_array("a0", array0)
+        # set a1 to the length of the array
+        t.input_scalar("a1", len(array0))
+        # call the `argmax` function
+        t.call("argmax")
+        # check that the register a0 contains the correct output
+        t.check_scalar("a0", 1)
+        # generate the `assembly/TestArgmax_test_simple.s` file and run it through venus
+        t.execute()
+
     def test_argmax_standard(self):
         t = AssemblyTest(self, "argmax.s")
         # create an array in the data section
@@ -274,6 +289,17 @@ class TestMatmul(unittest.TestCase):
         t.check_array(output_array, result)
         t.execute(code=code)
 
+    def test_matmul_Mytest(self):
+        self.doMatmul(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            3,
+            3,
+            [1, 1, 1],
+            3,
+            1,
+            [6, 15, 24],  # result does not matter
+        )
+
     def test_matmul_square(self):
         self.doMatmul(
             [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -409,17 +435,6 @@ class TestMatmul(unittest.TestCase):
             code=38,
         )
 
-    def test_matmul_unmatched_dims(self):
-        self.doMatmul(
-            [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            3,
-            2,
-            [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            3,
-            3,
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],  # result does not matter
-            code=38,
-        )
 
 
 class TestReadMatrix(unittest.TestCase):
